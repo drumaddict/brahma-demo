@@ -1,0 +1,6 @@
+%h1
+  THINGS
+%ul
+  -@things.each do |thing|
+    %li
+      =link_to thing.title.titleize, type_thing_path(@type,thing)
