@@ -1,2 +1,7 @@
-%h1
-  =@thing.title.titleize
+.row
+  .col-sm-8.blog-main
+    .blog-post
+      %h2.blog-post-title=@thing.title
+      %p.blog-post-meta=@thing.created_at.to_formatted_s(:long)
+      %p=@thing.description
+  = render partial: 'website/blog/sidebar'

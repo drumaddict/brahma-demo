@@ -9,5 +9,7 @@ class HomepageController < WebsiteController
 
     #@featured_incidents=StaticPage.incidents_all.featured.limit(8) rescue nil
     #@featured_incident_first=@featured_incidents.featured_first.limit(1).first rescue nil
+    render 'index_blog'
+    #render 'index_cover'
   end
 end

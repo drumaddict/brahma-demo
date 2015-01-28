@@ -1,5 +1,9 @@
 class Base::WebsiteController < ApplicationController
 
+  layout 'application_blog'
+  #layout 'application_cover'
+
+
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, with: :render_error
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found

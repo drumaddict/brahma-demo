@@ -1,6 +1,9 @@
-%h1
-  TYPE
-%ul
-  -@types.each do |type|
-    %li
-      =link_to type.title.titleize, type_path(type)
+.row
+  .col-sm-8.blog-main
+    %h1
+      Types
+    %ol.list-unstyled
+      -@types.each do |type|
+        %li
+          =link_to type.title.titleize, type_path(type)
+  = render partial: 'website/blog/sidebar'

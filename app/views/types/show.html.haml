@@ -1,6 +1,17 @@
-%h1
-  =@type.title
-%ul
-  -@things.each do |thing|
-    %li
-      =link_to thing.title.titleize, type_thing_path(@type,thing)
+.row
+  .col-sm-8.blog-main
+    .blog-post
+      %h2.blog-post-title=@type.title
+      %p.blog-post-meta=@type.created_at
+      %p=@type.description
+      %hr
+        %ol.list-unstyled
+          -@things.each do |thing|
+            %li
+              =link_to thing.title.titleize, type_thing_path(@type,thing)
+  = render partial: 'website/blog/sidebar'
+
+
+
+
+
