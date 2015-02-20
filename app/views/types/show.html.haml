@@ -9,7 +9,7 @@
           -@things.each do |thing|
             %li
               =link_to thing.title.titleize, type_thing_path(@type,thing)
-  = render partial: 'website/blog/sidebar'
+  = render partial: 'sidebar'
 
 
 

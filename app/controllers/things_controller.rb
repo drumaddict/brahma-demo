@@ -1,4 +1,4 @@
-class ThingsController <  WebsiteController
+class ThingsController <  AppController
 
 before_filter :find_thing
 

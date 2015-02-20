@@ -1,4 +1,4 @@
-class TypesController <  WebsiteController
+class TypesController <  AppController
 
 before_filter :find_type, :only => [:show]
 
