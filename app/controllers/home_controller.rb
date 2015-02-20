@@ -1,4 +1,4 @@
-class HomepageController < WebsiteController
+class HomeController < AppController
   def index
     #@main_slider_banners = BannerZone.find_by_slug("main_slider").banners rescue []
     #@top_banners = BannerZone.find_by_slug("homepage_top").banners rescue []

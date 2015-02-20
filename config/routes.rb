@@ -6,20 +6,16 @@ Rails.application.routes.draw do
   #   end
   # end
 
-
+  brahma_routes
   namespace :api do
     resources :things, :types
   end
 
-  get '/' => "homepage#index", as: "home"
-  root to: "homepage#index"
 
     resources :types, only: [:index, :show] do
     resources :things  , only: [:index, :show]
      end
 
-  # 404 catch all
-  get "*path", :to => "website#routing_error"
 
 
   # The priority is based upon order of creation: first created -> highest priority.
