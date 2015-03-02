@@ -7,6 +7,7 @@ group :development do
  gem 'binding_of_caller'
  gem 'faker'
  gem 'factory_girl'
+ gem 'annotate'
 end
 
 gem 'brahma',      path: '../../Labs/brahma'

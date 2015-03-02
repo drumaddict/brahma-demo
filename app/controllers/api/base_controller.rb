@@ -1,4 +1,4 @@
-class Api::BaseController < ApplicationController
+class Api::BaseController < AppController
   protect_from_forgery with: :null_session
   before_action :set_resource, only: [:destroy, :show, :update]
   layout false

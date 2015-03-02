@@ -1,4 +1,4 @@
-class Base::WebsiteController < ApplicationController
+class Base::WebsiteController < FrontendController
 
   layout 'application_blog'
   #layout 'application_cover'
