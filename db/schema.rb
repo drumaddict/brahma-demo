@@ -11,9 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301232218) do
+ActiveRecord::Schema.define(version: 20150322232622) do
 
   create_table "administrators", force: :cascade do |t|
+    t.integer  "role_id",                limit: 4
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255
@@ -33,7 +34,131 @@ ActiveRecord::Schema.define(version: 20150301232218) do
 
   add_index "administrators", ["email"], name: "index_administrators_on_email", unique: true, using: :btree
   add_index "administrators", ["reset_password_token"], name: "index_administrators_on_reset_password_token", unique: true, using: :btree
+  add_index "administrators", ["role_id"], name: "index_administrators_on_role_id", using: :btree
   add_index "administrators", ["unlock_token"], name: "index_administrators_on_unlock_token", unique: true, using: :btree
+
+  create_table "article_translations", force: :cascade do |t|
+    t.integer  "article_id",       limit: 4,     null: false
+    t.string   "locale",           limit: 255,   null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "title",            limit: 255
+    t.text     "summary",          limit: 65535
+    t.text     "body",             limit: 65535
+    t.string   "meta_title",       limit: 255
+    t.string   "meta_description", limit: 255
+    t.string   "meta_keywords",    limit: 255
+  end
+
+  add_index "article_translations", ["article_id"], name: "index_article_translations_on_article_id", using: :btree
+  add_index "article_translations", ["locale"], name: "index_article_translations_on_locale", using: :btree
+
+  create_table "article_type_translations", force: :cascade do |t|
+    t.integer  "article_type_id",  limit: 4,     null: false
+    t.string   "locale",           limit: 255,   null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "title",            limit: 255
+    t.text     "description",      limit: 65535
+    t.string   "meta_title",       limit: 255
+    t.string   "meta_description", limit: 255
+    t.string   "meta_keywords",    limit: 255
+  end
+
+  add_index "article_type_translations", ["article_type_id"], name: "index_article_type_translations_on_article_type_id", using: :btree
+  add_index "article_type_translations", ["locale"], name: "index_article_type_translations_on_locale", using: :btree
+
+  create_table "article_types", force: :cascade do |t|
+    t.string   "slug",       limit: 255
+    t.integer  "parent_id",  limit: 4
+    t.integer  "sort_order", limit: 4
+    t.boolean  "public",     limit: 1,   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "article_types", ["parent_id"], name: "index_article_types_on_parent_id", using: :btree
+  add_index "article_types", ["public"], name: "index_article_types_on_public", using: :btree
+  add_index "article_types", ["slug"], name: "index_article_types_on_slug", unique: true, using: :btree
+
+  create_table "articles", force: :cascade do |t|
+    t.integer  "article_type_id", limit: 4
+    t.string   "slug",            limit: 255
+    t.boolean  "draft",           limit: 1,   default: false
+    t.boolean  "featured",        limit: 1,   default: false
+    t.boolean  "published",       limit: 1,   default: false
+    t.datetime "published_at"
+    t.datetime "expires_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "articles", ["article_type_id"], name: "index_articles_on_article_type_id", using: :btree
+  add_index "articles", ["featured"], name: "index_articles_on_featured", using: :btree
+  add_index "articles", ["published"], name: "index_articles_on_published", using: :btree
+  add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
+
+  create_table "file_attachments", force: :cascade do |t|
+    t.string   "type",         limit: 255
+    t.string   "title",        limit: 255
+    t.string   "attachment",   limit: 255
+    t.string   "content_type", limit: 255
+    t.integer  "file_size",    limit: 4
+    t.integer  "position",     limit: 4,   default: 0
+    t.boolean  "is_default",   limit: 1,   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "file_attachments", ["content_type"], name: "index_file_attachments_on_content_type", using: :btree
+  add_index "file_attachments", ["type"], name: "index_file_attachments_on_type", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name", limit: 255
+  end
+
+  create_table "sitemap_item_translations", force: :cascade do |t|
+    t.integer  "sitemap_item_id", limit: 4,     null: false
+    t.string   "locale",          limit: 255,   null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "title",           limit: 255
+    t.text     "description",     limit: 65535
+  end
+
+  add_index "sitemap_item_translations", ["locale"], name: "index_sitemap_item_translations_on_locale", using: :btree
+  add_index "sitemap_item_translations", ["sitemap_item_id"], name: "index_sitemap_item_translations_on_sitemap_item_id", using: :btree
+
+  create_table "sitemap_item_types", force: :cascade do |t|
+    t.string   "title",         limit: 255
+    t.string   "controller",    limit: 255
+    t.string   "rest_action",   limit: 255
+    t.string   "sitemap_class", limit: 255
+    t.string   "url",           limit: 255
+    t.string   "external_url",  limit: 255
+    t.string   "params",        limit: 255
+    t.string   "icon",          limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sitemap_items", force: :cascade do |t|
+    t.integer  "sitemap_item_type_id",     limit: 4
+    t.integer  "parent_id",                limit: 4
+    t.integer  "sort_order",               limit: 4
+    t.string   "slug",                     limit: 255
+    t.string   "url_hash",                 limit: 255
+    t.string   "sitemap_item_object_type", limit: 255
+    t.integer  "sitemap_item_object_id",   limit: 4
+    t.string   "css_celector",             limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sitemap_items", ["parent_id"], name: "index_sitemap_items_on_parent_id", using: :btree
+  add_index "sitemap_items", ["sitemap_item_object_id"], name: "index_sitemap_items_on_sitemap_item_object_id", using: :btree
+  add_index "sitemap_items", ["sitemap_item_object_type"], name: "index_sitemap_items_on_sitemap_item_object_type", using: :btree
+  add_index "sitemap_items", ["slug"], name: "index_sitemap_items_on_slug", unique: true, using: :btree
 
   create_table "things", force: :cascade do |t|
     t.string   "title",       limit: 255

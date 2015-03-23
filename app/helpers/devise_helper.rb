@@ -3,4 +3,5 @@ module DeviseHelper
    messages=resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
    a='OUTSIDE BRHMA'
   end
+
 end
