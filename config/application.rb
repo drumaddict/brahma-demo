@@ -35,6 +35,9 @@ module Myapp
       config.assets.paths << bower_path
     end
 
+config.autoload_paths += [
+  config.root.join('app')
+]
     # Precompile Bootstrap fonts
     config.assets.precompile << %r(bootstrap-sass-official/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff)$)
     # Minimum Sass number precision required by bootstrap-sass
