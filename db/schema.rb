@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325164411) do
+ActiveRecord::Schema.define(version: 20150331222011) do
 
   create_table "administrators", force: :cascade do |t|
     t.integer  "role_id",                limit: 4
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 20150325164411) do
   add_index "article_translations", ["article_id"], name: "index_article_translations_on_article_id", using: :btree
   add_index "article_translations", ["locale"], name: "index_article_translations_on_locale", using: :btree
 
+  create_table "article_type_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id",   limit: 4, null: false
+    t.integer "descendant_id", limit: 4, null: false
+    t.integer "generations",   limit: 4, null: false
+  end
+
+  add_index "article_type_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "article_type_anc_desc_idx", unique: true, using: :btree
+  add_index "article_type_hierarchies", ["descendant_id"], name: "article_type_desc_idx", using: :btree
+
   create_table "article_type_translations", force: :cascade do |t|
     t.integer  "article_type_id",  limit: 4,     null: false
     t.string   "locale",           limit: 255,   null: false
@@ -81,19 +90,25 @@ ActiveRecord::Schema.define(version: 20150325164411) do
   add_index "article_types", ["public"], name: "index_article_types_on_public", using: :btree
   add_index "article_types", ["slug"], name: "index_article_types_on_slug", unique: true, using: :btree
 
+  create_table "article_types_articles", id: false, force: :cascade do |t|
+    t.integer "article_type_id", limit: 4
+    t.integer "article_id",      limit: 4
+  end
+
+  add_index "article_types_articles", ["article_id"], name: "index_article_types_articles_on_article_id", using: :btree
+  add_index "article_types_articles", ["article_type_id"], name: "index_article_types_articles_on_article_type_id", using: :btree
+
   create_table "articles", force: :cascade do |t|
-    t.integer  "article_type_id", limit: 4
-    t.string   "slug",            limit: 255
-    t.boolean  "draft",           limit: 1,   default: false
-    t.boolean  "featured",        limit: 1,   default: false
-    t.boolean  "published",       limit: 1,   default: false
+    t.string   "slug",         limit: 255
+    t.boolean  "draft",        limit: 1,   default: false
+    t.boolean  "featured",     limit: 1,   default: false
+    t.boolean  "published",    limit: 1,   default: false
     t.datetime "published_at"
     t.datetime "expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "articles", ["article_type_id"], name: "index_articles_on_article_type_id", using: :btree
   add_index "articles", ["featured"], name: "index_articles_on_featured", using: :btree
   add_index "articles", ["published"], name: "index_articles_on_published", using: :btree
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
