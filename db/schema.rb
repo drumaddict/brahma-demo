@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331222011) do
+ActiveRecord::Schema.define(version: 20150405134612) do
 
   create_table "administrators", force: :cascade do |t|
     t.integer  "role_id",                limit: 4
@@ -114,13 +114,15 @@ ActiveRecord::Schema.define(version: 20150331222011) do
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
 
   create_table "file_attachments", force: :cascade do |t|
-    t.string   "type",         limit: 255
-    t.string   "title",        limit: 255
-    t.string   "attachment",   limit: 255
-    t.string   "content_type", limit: 255
-    t.integer  "file_size",    limit: 4
-    t.integer  "position",     limit: 4,   default: 0
-    t.boolean  "is_default",   limit: 1,   default: false
+    t.integer  "file_attachable_id",   limit: 4
+    t.string   "file_attachable_type", limit: 255
+    t.string   "type",                 limit: 255
+    t.string   "title",                limit: 255
+    t.string   "attachment",           limit: 255
+    t.string   "content_type",         limit: 255
+    t.integer  "file_size",            limit: 4
+    t.integer  "position",             limit: 4,   default: 0
+    t.boolean  "is_default",           limit: 1,   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

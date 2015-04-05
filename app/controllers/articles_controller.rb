@@ -1,6 +1,6 @@
 # encoding: UTF-8
 #Overriden to get previous and next articles
-require "#{GyxCore::controllers_dir}/articles_controller"
+require "#{Brahma::controllers_dir}/articles_controller"
 class ArticlesController < FrontendController
   before_filter :find_article, only: :show
 
