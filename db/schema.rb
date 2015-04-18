@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150405134612) do
+ActiveRecord::Schema.define(version: 20150418093316) do
 
   create_table "administrators", force: :cascade do |t|
     t.integer  "role_id",                limit: 4
@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 20150405134612) do
   add_index "administrators", ["reset_password_token"], name: "index_administrators_on_reset_password_token", unique: true, using: :btree
   add_index "administrators", ["role_id"], name: "index_administrators_on_role_id", using: :btree
   add_index "administrators", ["unlock_token"], name: "index_administrators_on_unlock_token", unique: true, using: :btree
+
+  create_table "affixtures", force: :cascade do |t|
+    t.integer  "affix_owner_id",   limit: 4
+    t.string   "affix_owner_type", limit: 255
+    t.integer  "affixable_id",     limit: 4
+    t.string   "affixable_type",   limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "affixtures", ["affix_owner_type", "affix_owner_id"], name: "index_affixtures_on_affix_owner_type_and_affix_owner_id", using: :btree
+  add_index "affixtures", ["affixable_type", "affixable_id"], name: "index_affixtures_on_affixable_type_and_affixable_id", using: :btree
 
   create_table "article_translations", force: :cascade do |t|
     t.integer  "article_id",       limit: 4,     null: false
@@ -113,22 +125,22 @@ ActiveRecord::Schema.define(version: 20150405134612) do
   add_index "articles", ["published"], name: "index_articles_on_published", using: :btree
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
 
-  create_table "file_attachments", force: :cascade do |t|
-    t.integer  "file_attachable_id",   limit: 4
-    t.string   "file_attachable_type", limit: 255
-    t.string   "type",                 limit: 255
-    t.string   "title",                limit: 255
-    t.string   "attachment",           limit: 255
-    t.string   "content_type",         limit: 255
-    t.integer  "file_size",            limit: 4
-    t.integer  "position",             limit: 4,   default: 0
-    t.boolean  "is_default",           limit: 1,   default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "data_files", force: :cascade do |t|
+    t.string   "title",         limit: 255
+    t.string   "file_type",     limit: 255
+    t.string   "data_file",     limit: 255
+    t.string   "content_type",  limit: 255
+    t.integer  "file_size",     limit: 4
+    t.integer  "position",      limit: 4,   default: 0
+    t.boolean  "default_image", limit: 1,   default: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
   end
 
-  add_index "file_attachments", ["content_type"], name: "index_file_attachments_on_content_type", using: :btree
-  add_index "file_attachments", ["type"], name: "index_file_attachments_on_type", using: :btree
+  add_index "data_files", ["content_type"], name: "index_data_files_on_content_type", using: :btree
+  add_index "data_files", ["default_image"], name: "index_data_files_on_default_image", using: :btree
+  add_index "data_files", ["file_type"], name: "index_data_files_on_file_type", using: :btree
+  add_index "data_files", ["position"], name: "index_data_files_on_position", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false

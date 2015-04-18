@@ -38,6 +38,9 @@ module Myapp
 config.autoload_paths += [
   config.root.join('app')
 ]
+
+config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+
     # Precompile Bootstrap fonts
     config.assets.precompile << %r(bootstrap-sass-official/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff)$)
     # Minimum Sass number precision required by bootstrap-sass

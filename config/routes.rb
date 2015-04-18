@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+ mount Ckeditor::Engine => '/ckeditor'
   # namespace :api, defaults: {format: :json} do
   #   resources :types, only: [:index, :create, :update, :destroy] do
   #     resources :things, only: [:index, :create, :update, :destroy]
