@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418093316) do
+ActiveRecord::Schema.define(version: 20150419092618) do
 
   create_table "administrators", force: :cascade do |t|
     t.integer  "role_id",                limit: 4
@@ -125,8 +125,21 @@ ActiveRecord::Schema.define(version: 20150418093316) do
   add_index "articles", ["published"], name: "index_articles_on_published", using: :btree
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
 
+  create_table "data_file_translations", force: :cascade do |t|
+    t.integer  "data_file_id", limit: 4,     null: false
+    t.string   "locale",       limit: 255,   null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "title",        limit: 255
+    t.text     "description",  limit: 65535
+  end
+
+  add_index "data_file_translations", ["data_file_id"], name: "index_data_file_translations_on_data_file_id", using: :btree
+  add_index "data_file_translations", ["locale"], name: "index_data_file_translations_on_locale", using: :btree
+
   create_table "data_files", force: :cascade do |t|
-    t.string   "title",         limit: 255
+    t.string   "link",          limit: 255
+    t.string   "link_target",   limit: 255
     t.string   "file_type",     limit: 255
     t.string   "data_file",     limit: 255
     t.string   "content_type",  limit: 255

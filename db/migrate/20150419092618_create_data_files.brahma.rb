@@ -2,7 +2,8 @@
 class CreateDataFiles < ActiveRecord::Migration
   def up
     create_table :data_files do |t|
-      t.string :title
+      t.string :link
+      t.string :link_target
       t.string :file_type, index: true
       t.string :data_file
       t.string :content_type,  index: true
@@ -11,6 +12,8 @@ class CreateDataFiles < ActiveRecord::Migration
       t.boolean :default_image,  index: true, default: false
       t.timestamps null: false
     end
+
+    DataFile.create_translation_table! title: :string, description: :text
   end
 
   def down
