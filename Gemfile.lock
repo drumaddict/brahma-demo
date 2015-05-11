@@ -131,6 +131,7 @@ GEM
       json
     awesome_nested_set (3.0.2)
       activerecord (>= 4.0.0, < 5)
+    awesome_print (1.6.1)
     babosa (1.0.2)
     backbone-on-rails (1.1.2.1)
       eco
@@ -454,6 +455,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  awesome_print
   better_errors
   binding_of_caller
   brahma!

@@ -8,6 +8,7 @@ group :development do
  gem 'faker'
  gem 'factory_girl'
  gem 'annotate'
+ gem 'awesome_print', :require => 'ap'
 end
 
 gem 'brahma',      path: '../../Labs/brahma'

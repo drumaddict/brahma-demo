@@ -42,11 +42,16 @@ ActiveRecord::Schema.define(version: 20150419092618) do
     t.string   "affix_owner_type", limit: 255
     t.integer  "affixable_id",     limit: 4
     t.string   "affixable_type",   limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "position",         limit: 4,   default: 0
   end
 
+  add_index "affixtures", ["affix_owner_id", "affix_owner_type"], name: "index_affixtures_on_affix_owner_id_and_affix_owner_type", using: :btree
+  add_index "affixtures", ["affix_owner_id"], name: "index_affixtures_on_affix_owner_id", using: :btree
   add_index "affixtures", ["affix_owner_type", "affix_owner_id"], name: "index_affixtures_on_affix_owner_type_and_affix_owner_id", using: :btree
+  add_index "affixtures", ["affixable_id", "affixable_type"], name: "index_affixtures_on_affixable_id_and_affixable_type", using: :btree
+  add_index "affixtures", ["affixable_id"], name: "index_affixtures_on_affixable_id", using: :btree
   add_index "affixtures", ["affixable_type", "affixable_id"], name: "index_affixtures_on_affixable_type_and_affixable_id", using: :btree
 
   create_table "article_translations", force: :cascade do |t|
