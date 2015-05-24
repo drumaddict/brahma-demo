@@ -7,24 +7,34 @@ CKEDITOR.editorConfig = function( config )
 {
 
 
-  // config.extraPlugins = "mediaembed";
-  // config.entities_greek = false;
-  // config.toolbar = 'Easy';
-  // //config.toolbar = "simple";
-  // config.pasteFromWordRemoveStyles = true;
-  // config.pasteFromWordRemoveFontStyles = true;
+   config.extraPlugins = "mediaembed";
 
-  // config.filebrowserBrowseUrl = '/gr/el/admin/assets?layout=iframe&select_style=true';
-  // config.filebrowserImageBrowseUrl = '/gr/el/admin/assets?layout=iframe&select_style=true&images_only=true';
+  console.log('CKEDITOR CONFIG');
+  config.extraPlugins = "mediaembed";
+  config.entities_greek = false;
+  config.toolbar = 'Easy';
+  config.pasteFromWordRemoveStyles = true;
+  config.pasteFromWordRemoveFontStyles = true;
+  config.forcePasteAsPlainText = true;
 
-  // config.width = 720;
-  // config.height = 750;
+  config.width = 720;
+  config.height = 250;
 
+  config.filebrowserBrowseUrl = '/en/admin/data_files?layout=iframe&img_ver=true';
+  config.filebrowserImageBrowseUrl = '/en/admin/data_files?layout=iframe&img_ver=true&img_only=true';
 
-
-  // Define changes to default configuration here. For example:
-  // config.language = 'fr';
-  // config.uiColor = '#AADC6E';
+  config.toolbar_Easy = [
+        ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','RemoveFormat'],
+        ['Styles','Format'],
+        ['Maximize'],
+        ['Bold','Italic','Underline','Strike','Subscript', 'Superscript'],
+        ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+        ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+        ['Link','Unlink','Anchor'],
+        ['Table','HorizontalRule','SpecialChar','PageBreak'],
+        ['Image','MediaEmbed'],
+        ['Source']
+    ];
 
 
 
@@ -41,12 +51,19 @@ CKEDITOR.editorConfig = function( config )
   ];
 
 
-
+  // config.filebrowserBrowseUrl = '/en/admin/data_files?layout=iframe&img_ver=true';
+  // config.filebrowserImageBrowseUrl = '/en/admin/data_files?layout=iframe&img_ver=true&img_only=true';
 
 
   /* Filebrowser routes */
   // The location of an external file browser, that should be launched when "Browse Server" button is pressed.
-  config.filebrowserBrowseUrl = "/ckeditor/attachment_files";
+  //config.filebrowserBrowseUrl = "/ckeditor/attachment_files";
+  config.filebrowserBrowseUrl = '/en/admin/data_files?layout=iframe&ck=true&img_ver=true';
+   config.filebrowserWindowWidth = 800;
+
+    // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Image dialog.
+  //config.filebrowserImageBrowseUrl = "/ckeditor/pictures/br";
+  config.filebrowserImageBrowseUrl = '/en/admin/data_files?layout=iframe&ck=true&img_ver=true&img_only=true';
 
   // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Flash dialog.
   config.filebrowserFlashBrowseUrl = "/ckeditor/attachment_files";
@@ -57,8 +74,6 @@ CKEDITOR.editorConfig = function( config )
   // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Link tab of Image dialog.
   config.filebrowserImageBrowseLinkUrl = "/ckeditor/pictures/linkurl";
 
-  // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Image dialog.
-  config.filebrowserImageBrowseUrl = "/ckeditor/pictures/br";
 
   // The location of a script that handles file uploads in the Image dialog.
   config.filebrowserImageUploadUrl = "/ckeditor/pictures/up";
