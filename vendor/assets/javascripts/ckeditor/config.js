@@ -20,8 +20,8 @@ CKEDITOR.editorConfig = function( config )
   config.width = 720;
   config.height = 250;
 
-  config.filebrowserBrowseUrl = '/en/admin/data_files?layout=iframe&img_ver=true';
-  config.filebrowserImageBrowseUrl = '/en/admin/data_files?layout=iframe&img_ver=true&img_only=true';
+  config.filebrowserBrowseUrl = '/en/admin/media?layout=iframe&img_ver=true';
+  config.filebrowserImageBrowseUrl = '/en/admin/media?layout=iframe&img_ver=true&img_only=true';
 
   config.toolbar_Easy = [
         ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','RemoveFormat'],
@@ -58,12 +58,12 @@ CKEDITOR.editorConfig = function( config )
   /* Filebrowser routes */
   // The location of an external file browser, that should be launched when "Browse Server" button is pressed.
   //config.filebrowserBrowseUrl = "/ckeditor/attachment_files";
-  config.filebrowserBrowseUrl = '/en/admin/data_files?layout=iframe&ck=true&img_ver=true';
+  config.filebrowserBrowseUrl = '/en/admin/media?layout=iframe&ck=true&img_ver=true';
    config.filebrowserWindowWidth = 800;
 
     // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Image dialog.
   //config.filebrowserImageBrowseUrl = "/ckeditor/pictures/br";
-  config.filebrowserImageBrowseUrl = '/en/admin/data_files?layout=iframe&ck=true&img_ver=true&img_only=true';
+  config.filebrowserImageBrowseUrl = '/en/admin/media?layout=iframe&ck=true&img_ver=true&img_only=true';
 
   // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Flash dialog.
   config.filebrowserFlashBrowseUrl = "/ckeditor/attachment_files";

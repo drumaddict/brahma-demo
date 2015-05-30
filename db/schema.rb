@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419092618) do
+ActiveRecord::Schema.define(version: 20150530132816) do
 
   create_table "administrators", force: :cascade do |t|
     t.integer  "role_id",                limit: 4
@@ -130,36 +130,6 @@ ActiveRecord::Schema.define(version: 20150419092618) do
   add_index "articles", ["published"], name: "index_articles_on_published", using: :btree
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
 
-  create_table "data_file_translations", force: :cascade do |t|
-    t.integer  "data_file_id", limit: 4,     null: false
-    t.string   "locale",       limit: 255,   null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "title",        limit: 255
-    t.text     "description",  limit: 65535
-  end
-
-  add_index "data_file_translations", ["data_file_id"], name: "index_data_file_translations_on_data_file_id", using: :btree
-  add_index "data_file_translations", ["locale"], name: "index_data_file_translations_on_locale", using: :btree
-
-  create_table "data_files", force: :cascade do |t|
-    t.string   "link",          limit: 255
-    t.string   "link_target",   limit: 255
-    t.string   "file_type",     limit: 255
-    t.string   "data_file",     limit: 255
-    t.string   "content_type",  limit: 255
-    t.integer  "file_size",     limit: 4
-    t.integer  "position",      limit: 4,   default: 0
-    t.boolean  "default_image", limit: 1,   default: false
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-  end
-
-  add_index "data_files", ["content_type"], name: "index_data_files_on_content_type", using: :btree
-  add_index "data_files", ["default_image"], name: "index_data_files_on_default_image", using: :btree
-  add_index "data_files", ["file_type"], name: "index_data_files_on_file_type", using: :btree
-  add_index "data_files", ["position"], name: "index_data_files_on_position", using: :btree
-
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
     t.integer  "sluggable_id",   limit: 4,   null: false
@@ -172,6 +142,40 @@ ActiveRecord::Schema.define(version: 20150419092618) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "media", force: :cascade do |t|
+    t.integer  "third_party_media_id", limit: 4
+    t.string   "filename",             limit: 255
+    t.string   "link_target",          limit: 255
+    t.string   "medium",               limit: 255
+    t.string   "checksum",             limit: 255
+    t.integer  "duration",             limit: 4
+    t.integer  "bitrate",              limit: 4
+    t.string   "file_type",            limit: 255
+    t.string   "content_type",         limit: 255
+    t.integer  "file_size",            limit: 4
+    t.integer  "position",             limit: 4,   default: 999
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
+  add_index "media", ["content_type"], name: "index_media_on_content_type", using: :btree
+  add_index "media", ["file_type"], name: "index_media_on_file_type", using: :btree
+  add_index "media", ["position"], name: "index_media_on_position", using: :btree
+
+  create_table "medium_translations", force: :cascade do |t|
+    t.integer  "medium_id",              limit: 4,     null: false
+    t.string   "locale",                 limit: 255,   null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "title",                  limit: 255
+    t.text     "description",            limit: 65535
+    t.string   "third_party_media_code", limit: 255
+    t.string   "link",                   limit: 255
+  end
+
+  add_index "medium_translations", ["locale"], name: "index_medium_translations_on_locale", using: :btree
+  add_index "medium_translations", ["medium_id"], name: "index_medium_translations_on_medium_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string "name", limit: 255
@@ -232,6 +236,13 @@ ActiveRecord::Schema.define(version: 20150419092618) do
   end
 
   add_index "things", ["type_id"], name: "index_things_on_type_id", using: :btree
+
+  create_table "third_party_media", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "types", force: :cascade do |t|
     t.string   "title",       limit: 255
