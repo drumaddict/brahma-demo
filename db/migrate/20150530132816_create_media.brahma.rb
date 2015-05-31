@@ -24,7 +24,7 @@ class CreateMedia < ActiveRecord::Migration
 
   def down
     drop_table :media
-    drop_table :media_translations
+    drop_table :medium_translations
   end
 end
 

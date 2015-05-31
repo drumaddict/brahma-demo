@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530132816) do
+ActiveRecord::Schema.define(version: 20150531083428) do
 
   create_table "administrators", force: :cascade do |t|
     t.integer  "role_id",                limit: 4
@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(version: 20150530132816) do
 
   create_table "media", force: :cascade do |t|
     t.integer  "third_party_media_id", limit: 4
+    t.string   "type",                 limit: 255
     t.string   "filename",             limit: 255
     t.string   "link_target",          limit: 255
     t.string   "medium",               limit: 255
@@ -239,6 +240,7 @@ ActiveRecord::Schema.define(version: 20150530132816) do
 
   create_table "third_party_media", force: :cascade do |t|
     t.string   "title",       limit: 255
+    t.string   "slug",        limit: 255
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false

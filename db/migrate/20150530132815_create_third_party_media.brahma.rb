@@ -3,6 +3,7 @@ class CreateThirdPartyMedia < ActiveRecord::Migration
   def up
     create_table :third_party_media do |t|
       t.string :title
+      t.string :slug
       t.string :description
       t.timestamps null: false
     end
