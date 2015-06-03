@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531083428) do
+ActiveRecord::Schema.define(version: 20150603204936) do
 
   create_table "administrators", force: :cascade do |t|
     t.integer  "role_id",                limit: 4
@@ -163,6 +163,19 @@ ActiveRecord::Schema.define(version: 20150531083428) do
   add_index "media", ["content_type"], name: "index_media_on_content_type", using: :btree
   add_index "media", ["file_type"], name: "index_media_on_file_type", using: :btree
   add_index "media", ["position"], name: "index_media_on_position", using: :btree
+
+  create_table "media_affixtures", force: :cascade do |t|
+    t.integer  "media_affix_owner_id",   limit: 4
+    t.string   "media_affix_owner_type", limit: 255
+    t.integer  "medium_id",              limit: 4
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.integer  "position",               limit: 4,   default: 999
+  end
+
+  add_index "media_affixtures", ["media_affix_owner_id", "media_affix_owner_type"], name: "media_owner_id_type_index", unique: true, using: :btree
+  add_index "media_affixtures", ["media_affix_owner_type", "media_affix_owner_id"], name: "media_owner_index", using: :btree
+  add_index "media_affixtures", ["medium_id"], name: "index_media_affixtures_on_medium_id", using: :btree
 
   create_table "medium_translations", force: :cascade do |t|
     t.integer  "medium_id",              limit: 4,     null: false
