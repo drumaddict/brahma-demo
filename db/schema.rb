@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603204936) do
+ActiveRecord::Schema.define(version: 20150628221646) do
 
   create_table "administrators", force: :cascade do |t|
     t.integer  "role_id",                limit: 4
@@ -144,25 +144,28 @@ ActiveRecord::Schema.define(version: 20150603204936) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "media", force: :cascade do |t|
-    t.integer  "third_party_media_id", limit: 4
-    t.string   "type",                 limit: 255
-    t.string   "filename",             limit: 255
-    t.string   "link_target",          limit: 255
-    t.string   "medium",               limit: 255
-    t.string   "checksum",             limit: 255
-    t.integer  "duration",             limit: 4
-    t.integer  "bitrate",              limit: 4
-    t.string   "file_type",            limit: 255
-    t.string   "content_type",         limit: 255
-    t.integer  "file_size",            limit: 4
-    t.integer  "position",             limit: 4,   default: 999
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.integer  "third_party_medium_id",  limit: 4
+    t.string   "third_party_media_code", limit: 255
+    t.string   "type",                   limit: 255
+    t.string   "filename",               limit: 255
+    t.string   "link",                   limit: 255
+    t.string   "link_target",            limit: 255
+    t.string   "medium",                 limit: 255
+    t.string   "checksum",               limit: 255
+    t.integer  "duration",               limit: 4
+    t.integer  "bitrate",                limit: 4
+    t.string   "file_type",              limit: 255
+    t.string   "content_type",           limit: 255
+    t.integer  "file_size",              limit: 4
+    t.integer  "position",               limit: 4,   default: 999
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   add_index "media", ["content_type"], name: "index_media_on_content_type", using: :btree
   add_index "media", ["file_type"], name: "index_media_on_file_type", using: :btree
   add_index "media", ["position"], name: "index_media_on_position", using: :btree
+  add_index "media", ["third_party_media_code"], name: "index_media_on_third_party_media_code", using: :btree
 
   create_table "media_affixtures", force: :cascade do |t|
     t.integer  "media_affix_owner_id",   limit: 4
@@ -173,7 +176,7 @@ ActiveRecord::Schema.define(version: 20150603204936) do
     t.integer  "position",               limit: 4,   default: 999
   end
 
-  add_index "media_affixtures", ["media_affix_owner_id", "media_affix_owner_type"], name: "media_owner_id_type_index", unique: true, using: :btree
+  add_index "media_affixtures", ["media_affix_owner_id", "media_affix_owner_type"], name: "media_owner_id_type_index", using: :btree
   add_index "media_affixtures", ["media_affix_owner_type", "media_affix_owner_id"], name: "media_owner_index", using: :btree
   add_index "media_affixtures", ["medium_id"], name: "index_media_affixtures_on_medium_id", using: :btree
 
@@ -237,6 +240,45 @@ ActiveRecord::Schema.define(version: 20150603204936) do
   add_index "sitemap_items", ["sitemap_item_object_id"], name: "index_sitemap_items_on_sitemap_item_object_id", using: :btree
   add_index "sitemap_items", ["sitemap_item_object_type"], name: "index_sitemap_items_on_sitemap_item_object_type", using: :btree
   add_index "sitemap_items", ["slug"], name: "index_sitemap_items_on_slug", unique: true, using: :btree
+
+  create_table "sitemap_node_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id",   limit: 4, null: false
+    t.integer "descendant_id", limit: 4, null: false
+    t.integer "generations",   limit: 4, null: false
+  end
+
+  add_index "sitemap_node_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "sitemap_node_anc_desc_idx", unique: true, using: :btree
+  add_index "sitemap_node_hierarchies", ["descendant_id"], name: "sitemap_node_desc_idx", using: :btree
+
+  create_table "sitemap_node_translations", force: :cascade do |t|
+    t.integer  "sitemap_node_id", limit: 4,     null: false
+    t.string   "locale",          limit: 255,   null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "title",           limit: 255
+    t.text     "description",     limit: 65535
+  end
+
+  add_index "sitemap_node_translations", ["locale"], name: "index_sitemap_node_translations_on_locale", using: :btree
+  add_index "sitemap_node_translations", ["sitemap_node_id"], name: "index_sitemap_node_translations_on_sitemap_node_id", using: :btree
+
+  create_table "sitemap_nodes", force: :cascade do |t|
+    t.string   "slug",            limit: 255
+    t.integer  "parent_id",       limit: 4
+    t.integer  "sort_order",      limit: 4
+    t.string   "node_class",      limit: 255
+    t.string   "controller",      limit: 255
+    t.string   "action",          limit: 255
+    t.text     "url",             limit: 65535
+    t.boolean  "is_external_url", limit: 1
+    t.string   "external_url",    limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sitemap_nodes", ["parent_id"], name: "index_sitemap_nodes_on_parent_id", using: :btree
+  add_index "sitemap_nodes", ["slug"], name: "index_sitemap_nodes_on_slug", unique: true, using: :btree
+  add_index "sitemap_nodes", ["sort_order"], name: "index_sitemap_nodes_on_sort_order", using: :btree
 
   create_table "things", force: :cascade do |t|
     t.string   "title",       limit: 255

@@ -9,7 +9,7 @@ class CreateMediaAffixtures < ActiveRecord::Migration
     end
 
     add_index :media_affixtures, :medium_id
-    add_index :media_affixtures, [:media_affix_owner_id, :media_affix_owner_type], :unique => true, :name => 'media_owner_id_type_index'
+    add_index :media_affixtures, [:media_affix_owner_id, :media_affix_owner_type], :name => 'media_owner_id_type_index'
   end
 
   def down

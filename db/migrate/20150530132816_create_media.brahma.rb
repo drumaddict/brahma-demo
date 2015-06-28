@@ -2,10 +2,11 @@
 class CreateMedia < ActiveRecord::Migration
   def up
     create_table :media do |t|
-      t.references :third_party_media, null: true
+      t.references :third_party_medium, null: true
+      t.string :third_party_media_code, index: true
+      t.string :type
       t.string :filename
-      #t.string :third_party_media_code, index: true
-      #t.string :link
+      t.string :link
       t.string :link_target
       t.string :medium
       t.string :checksum

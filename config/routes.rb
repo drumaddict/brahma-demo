@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   # end
 
   brahma_routes
-  namespace :api do
-    resources :things, :types
-  end
+  # namespace :api do
+  #   resources :things, :types
+  # end
 
 
     resources :types, only: [:index, :show] do
