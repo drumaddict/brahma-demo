@@ -11,6 +11,7 @@ class CreateSitemapNodes < ActiveRecord::Migration
       t.text    :url
       t.boolean :is_external_url
       t.string  :external_url
+      t.boolean :public, default: false
       t.timestamps
     end
     add_index :sitemap_nodes, :slug, unique: true

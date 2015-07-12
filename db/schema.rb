@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150628221646) do
+ActiveRecord::Schema.define(version: 20150712212005) do
 
   create_table "administrators", force: :cascade do |t|
     t.integer  "role_id",                limit: 4
@@ -194,6 +194,44 @@ ActiveRecord::Schema.define(version: 20150628221646) do
   add_index "medium_translations", ["locale"], name: "index_medium_translations_on_locale", using: :btree
   add_index "medium_translations", ["medium_id"], name: "index_medium_translations_on_medium_id", using: :btree
 
+  create_table "navigation_node_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id",   limit: 4, null: false
+    t.integer "descendant_id", limit: 4, null: false
+    t.integer "generations",   limit: 4, null: false
+  end
+
+  add_index "navigation_node_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "navigation_node_anc_desc_idx", unique: true, using: :btree
+  add_index "navigation_node_hierarchies", ["descendant_id"], name: "navigation_node_desc_idx", using: :btree
+
+  create_table "navigation_node_translations", force: :cascade do |t|
+    t.integer  "navigation_node_id", limit: 4,   null: false
+    t.string   "locale",             limit: 255, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "title",              limit: 255
+  end
+
+  add_index "navigation_node_translations", ["locale"], name: "index_navigation_node_translations_on_locale", using: :btree
+  add_index "navigation_node_translations", ["navigation_node_id"], name: "index_navigation_node_translations_on_navigation_node_id", using: :btree
+
+  create_table "navigation_nodes", force: :cascade do |t|
+    t.integer  "sitemap_node_id", limit: 4
+    t.string   "slug",            limit: 255
+    t.boolean  "is_root",         limit: 1,     default: false
+    t.integer  "parent_id",       limit: 4
+    t.integer  "sort_order",      limit: 4
+    t.text     "url",             limit: 65535
+    t.boolean  "visible",         limit: 1,     default: false
+    t.string   "anchor_id",       limit: 255
+    t.string   "li_id",           limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "navigation_nodes", ["parent_id"], name: "index_navigation_nodes_on_parent_id", using: :btree
+  add_index "navigation_nodes", ["slug"], name: "index_navigation_nodes_on_slug", unique: true, using: :btree
+  add_index "navigation_nodes", ["sort_order"], name: "index_navigation_nodes_on_sort_order", using: :btree
+
   create_table "roles", force: :cascade do |t|
     t.string "name", limit: 255
   end
@@ -272,6 +310,7 @@ ActiveRecord::Schema.define(version: 20150628221646) do
     t.text     "url",             limit: 65535
     t.boolean  "is_external_url", limit: 1
     t.string   "external_url",    limit: 255
+    t.boolean  "public",          limit: 1,     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
