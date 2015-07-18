@@ -8,6 +8,8 @@ class CreateNavigationNodes < ActiveRecord::Migration
       t.integer    :parent_id
       t.integer    :sort_order
       t.text       :url
+      t.boolean    :is_external_url
+      t.string     :external_url
       t.boolean    :visible, default: false
       t.string     :anchor_id
       t.string     :li_id

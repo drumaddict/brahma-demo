@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712212005) do
+ActiveRecord::Schema.define(version: 20150716202503) do
 
   create_table "administrators", force: :cascade do |t|
     t.integer  "role_id",                limit: 4
@@ -221,6 +221,8 @@ ActiveRecord::Schema.define(version: 20150712212005) do
     t.integer  "parent_id",       limit: 4
     t.integer  "sort_order",      limit: 4
     t.text     "url",             limit: 65535
+    t.boolean  "is_external_url", limit: 1
+    t.string   "external_url",    limit: 255
     t.boolean  "visible",         limit: 1,     default: false
     t.string   "anchor_id",       limit: 255
     t.string   "li_id",           limit: 255
