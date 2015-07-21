@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716202503) do
+ActiveRecord::Schema.define(version: 20150720220015) do
 
   create_table "administrators", force: :cascade do |t|
     t.integer  "role_id",                limit: 4
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(version: 20150716202503) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "media", force: :cascade do |t|
+    t.string   "slug",                   limit: 255
     t.integer  "third_party_medium_id",  limit: 4
     t.string   "third_party_media_code", limit: 255
     t.string   "type",                   limit: 255
@@ -165,6 +166,7 @@ ActiveRecord::Schema.define(version: 20150716202503) do
   add_index "media", ["content_type"], name: "index_media_on_content_type", using: :btree
   add_index "media", ["file_type"], name: "index_media_on_file_type", using: :btree
   add_index "media", ["position"], name: "index_media_on_position", using: :btree
+  add_index "media", ["slug"], name: "index_media_on_slug", using: :btree
   add_index "media", ["third_party_media_code"], name: "index_media_on_third_party_media_code", using: :btree
 
   create_table "media_affixtures", force: :cascade do |t|
@@ -215,6 +217,7 @@ ActiveRecord::Schema.define(version: 20150716202503) do
   add_index "navigation_node_translations", ["navigation_node_id"], name: "index_navigation_node_translations_on_navigation_node_id", using: :btree
 
   create_table "navigation_nodes", force: :cascade do |t|
+    t.string   "type",            limit: 255
     t.integer  "sitemap_node_id", limit: 4
     t.string   "slug",            limit: 255
     t.boolean  "is_root",         limit: 1,     default: false
@@ -233,6 +236,7 @@ ActiveRecord::Schema.define(version: 20150716202503) do
   add_index "navigation_nodes", ["parent_id"], name: "index_navigation_nodes_on_parent_id", using: :btree
   add_index "navigation_nodes", ["slug"], name: "index_navigation_nodes_on_slug", unique: true, using: :btree
   add_index "navigation_nodes", ["sort_order"], name: "index_navigation_nodes_on_sort_order", using: :btree
+  add_index "navigation_nodes", ["type"], name: "index_navigation_nodes_on_type", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string "name", limit: 255
@@ -303,6 +307,7 @@ ActiveRecord::Schema.define(version: 20150716202503) do
   add_index "sitemap_node_translations", ["sitemap_node_id"], name: "index_sitemap_node_translations_on_sitemap_node_id", using: :btree
 
   create_table "sitemap_nodes", force: :cascade do |t|
+    t.string   "type",            limit: 255
     t.string   "slug",            limit: 255
     t.integer  "parent_id",       limit: 4
     t.integer  "sort_order",      limit: 4
@@ -320,6 +325,7 @@ ActiveRecord::Schema.define(version: 20150716202503) do
   add_index "sitemap_nodes", ["parent_id"], name: "index_sitemap_nodes_on_parent_id", using: :btree
   add_index "sitemap_nodes", ["slug"], name: "index_sitemap_nodes_on_slug", unique: true, using: :btree
   add_index "sitemap_nodes", ["sort_order"], name: "index_sitemap_nodes_on_sort_order", using: :btree
+  add_index "sitemap_nodes", ["type"], name: "index_sitemap_nodes_on_type", using: :btree
 
   create_table "things", force: :cascade do |t|
     t.string   "title",       limit: 255
