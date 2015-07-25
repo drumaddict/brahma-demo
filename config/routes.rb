@@ -16,6 +16,11 @@ Rails.application.routes.draw do
     resources :types, only: [:index, :show] do
     resources :things  , only: [:index, :show]
      end
+    resources :pages, only: [:index, :show]
+    resources :page_types, only: [:index, :show]
+    resources :media, only: [:index, :show]
+    resources :page_media, only: [:index, :show]
+
 
 
 
