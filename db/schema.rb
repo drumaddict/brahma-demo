@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150723221306) do
+ActiveRecord::Schema.define(version: 20150726075227) do
 
   create_table "administrators", force: :cascade do |t|
     t.integer  "role_id",                limit: 4
@@ -181,6 +181,31 @@ ActiveRecord::Schema.define(version: 20150723221306) do
   add_index "media_affixtures", ["media_affix_owner_id", "media_affix_owner_type"], name: "media_owner_id_type_index", using: :btree
   add_index "media_affixtures", ["media_affix_owner_type", "media_affix_owner_id"], name: "media_owner_index", using: :btree
   add_index "media_affixtures", ["medium_id"], name: "index_media_affixtures_on_medium_id", using: :btree
+
+  create_table "media_collection_translations", force: :cascade do |t|
+    t.integer  "media_collection_id", limit: 4,     null: false
+    t.string   "locale",              limit: 255,   null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "title",               limit: 255
+    t.text     "description",         limit: 65535
+    t.string   "meta_title",          limit: 255
+    t.string   "meta_description",    limit: 255
+    t.string   "meta_keywords",       limit: 255
+  end
+
+  add_index "media_collection_translations", ["locale"], name: "index_media_collection_translations_on_locale", using: :btree
+  add_index "media_collection_translations", ["media_collection_id"], name: "index_media_collection_translations_on_media_collection_id", using: :btree
+
+  create_table "media_collections", force: :cascade do |t|
+    t.string   "slug",       limit: 255
+    t.boolean  "active",     limit: 1,   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "media_collections", ["active"], name: "index_media_collections_on_active", using: :btree
+  add_index "media_collections", ["slug"], name: "index_media_collections_on_slug", unique: true, using: :btree
 
   create_table "medium_translations", force: :cascade do |t|
     t.integer  "medium_id",              limit: 4,     null: false
