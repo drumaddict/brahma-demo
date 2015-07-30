@@ -13,12 +13,16 @@
 //= require jquery
 //= require jquery_ujs
 // require turbolinks
-//= require bootstrap-sass-official/assets/javascripts/bootstrap-sprockets
+// require bootstrap-sass-official/assets/javascripts/bootstrap-sprockets
+
+//= require corlate/bootstrap.min.js
+//= require corlate/jquery.prettyPhoto
+//= require corlate/jquery.isotope.min
+//= require corlate/main
+//= require corlate/wow.min
 
 //= require scripts
 
 
-
-//= require_tree .
 
 
