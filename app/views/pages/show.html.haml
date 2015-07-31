@@ -1,0 +1,280 @@
+%section#blog.container
+  .center
+    %h2=@page.title
+    -#%p.lead Pellentesque habitant morbi tristique senectus et netus et malesuada
+  .blog
+    .row
+      .col-md-8
+        -if @page.media.any?
+          .blog-item
+            =image_tag @page.media.first.medium.url, alt: @page.title, width: '100%', class: 'img-responsive img-blog'
+          -#%img.img-responsive.img-blog{:alt => "", :src => image_url('blog/blog1.jpg'), :width => "100%"}/
+          .row
+            .col-xs-12.col-sm-2.text-center
+              .entry-meta
+                %span#publish_date 07  NOV
+                %span
+                  %i.fa.fa-user
+                  %a{:href => "#"} John Doe
+                %span
+                  %i.fa.fa-comment
+                  %a{:href => "blog-item.html#comments"} 2 Comments
+                %span
+                  %i.fa.fa-heart
+                  %a{:href => "#"} 56 Likes
+            .col-xs-12.col-sm-10.blog-content
+              %h2=@page.title
+              = raw @page.body
+
+              .post-tags
+                %strong Tag:
+                %a{:href => "#"} Cool
+                \/
+                %a{:href => "#"} Creative
+                \/
+                %a{:href => "#"} Dubttstep
+        / /.blog-item
+        .media.reply_section
+          .pull-left.post_reply.text-center
+            %a{:href => "#"}
+              %img.img-circle{:alt => "", :src =>  image_url('blog/boy.png')}/
+            %ul
+              %li
+                %a{:href => "#"}
+                  %i.fa.fa-facebook
+              %li
+                %a{:href => "#"}
+                  %i.fa.fa-twitter
+              %li
+                %a{:href => "#"}
+                  %i.fa.fa-google-plus
+          .media-body.post_reply_content
+            %h3 Antone L. Huges
+            %p.lead Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariaturp
+            %p
+              %strong Web:
+              %a{:href => "http://www.shapebootstrap.net"} www.shapebootstrap.net
+        -if @page.images.any?
+          %section#portfolio
+            .container
+              .center
+                %h2="#{@page.title}  Attached images"
+              %ul.portfolio-filter.text-center
+                %li
+                  %a.btn.btn-default.active{"data-filter" => "*", :href => "#"} All Works
+                %li
+                  %a.btn.btn-default{"data-filter" => ".bootstrap", :href => "#"} Creative
+                %li
+                  %a.btn.btn-default{"data-filter" => ".html", :href => "#"} Photography
+                %li
+                  %a.btn.btn-default{"data-filter" => ".wordpress", :href => "#"} Web Development
+              / /#portfolio-filter
+              .row
+                .portfolio-items
+                  -@page.images.each do |image|
+                    .portfolio-item.apps.col-xs-12.col-sm-4.col-md-3
+                      .recent-work-wrap
+                        -#%img.img-responsive{:alt => "", :src => "images/portfolio/recent/item1.png"}
+                        =image_tag image.becomes(PageMedium).medium.url(:slide_500_500), alt: image.title, class: 'img-responsive'
+                        .overlay
+                          .recent-work-inner
+                            %h3
+                              %a{:href => "#"}=image.title
+                            %p=image.description
+                            -#%a.preview{:href => "images/portfolio/full/item1.png", :rel => "prettyPhoto"}
+                            =link_to image.medium.url, rel: 'prettyPhoto', class: 'preview' do
+                              %i.fa.fa-eye
+                              View
+
+        %h1#comments_title 5 Comments
+        .media.comment_section
+          .pull-left.post_comments
+            %a{:href => "#"}
+              %img.img-circle{:alt => "", :src =>  image_url('blog/girl.png')}/
+          .media-body.post_reply_comments
+            %h3 Marsh
+            %h4 NOVEMBER 9, 2013 AT 9:15 PM
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            %a{:href => "#"} Reply
+        .media.comment_section
+          .pull-left.post_comments
+            %a{:href => "#"}
+              %img.img-circle{:alt => "", :src =>  image_url('blog/boy2.png')}/
+          .media-body.post_reply_comments
+            %h3 Marsh
+            %h4 NOVEMBER 9, 2013 AT 9:15 PM
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            %a{:href => "#"} Reply
+        .media.comment_section
+          .pull-left.post_comments
+            %a{:href => "#"}
+              %img.img-circle{:alt => "", :src =>  image_url('blog/boy3.png')}/
+          .media-body.post_reply_comments
+            %h3 Marsh
+            %h4 NOVEMBER 9, 2013 AT 9:15 PM
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            %a{:href => "#"} Reply
+        %div{:id => "contact-page clearfix"}
+          .status.alert.alert-success{:style => "display: none"}
+          .message_heading
+            %h4 Leave a Replay
+            %p Make sure you enter the(*)required information where indicate.HTML code is not allowed
+          %form#main-contact-form.contact-form{:action => "sendemail.php", :method => "post", :name => "contact-form", :role => "form"}
+            .row
+              .col-sm-5
+                .form-group
+                  %label Name *
+                  %input.form-control{:required => "required", :type => "text"}
+                .form-group
+                  %label Email *
+                  %input.form-control{:required => "required", :type => "email"}
+                .form-group
+                  %label URL
+                  %input.form-control{:type => "url"}
+              .col-sm-7
+                .form-group
+                  %label Message *
+                  %textarea#message.form-control{:name => "message", :required => "required", :rows => "8"}
+                .form-group
+                  %button.btn.btn-primary.btn-lg{:required => "required", :type => "submit"} Submit Message
+        / /#contact-page
+      / /.col-md-8
+      %aside.col-md-4
+        .widget.search
+          %form{:role => "form"}
+            %input.form-control.search_box{:autocomplete => "off", :placeholder => "Search Here", :type => "text"}
+        / /.search
+        .widget.categories
+          %h3 Recent Comments
+          .row
+            .col-sm-12
+              .single_comments
+                %img{:alt => "", :src => image_url('blog/avatar3.png')}/
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                .entry-meta.small.muted
+                  %span
+                    By
+                    = succeed "</span" do
+                      %a{:href => "#"} Alex
+                    %span
+                      On
+                      %a{:href => "#"} Creative
+              .single_comments
+                %img{:alt => "", :src => image_url('blog/avatar3.png')}/
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                .entry-meta.small.muted
+                  %span
+                    By
+                    = succeed "</span" do
+                      %a{:href => "#"} Alex
+                    %span
+                      On
+                      %a{:href => "#"} Creative
+              .single_comments
+                %img{:alt => "", :src =>  image_url('blog/avatar3.png')}/
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                .entry-meta.small.muted
+                  %span
+                    By
+                    = succeed "</span" do
+                      %a{:href => "#"} Alex
+                    %span
+                      On
+                      %a{:href => "#"} Creative
+        / /.recent comments
+        .widget.categories
+          %h3 Categories
+          .row
+            .col-sm-6
+              %ul.blog_category
+                %li
+                  %a{:href => "#"}
+                    Computers
+                    %span.badge 04
+                %li
+                  %a{:href => "#"}
+                    Smartphone
+                    %span.badge 10
+                %li
+                  %a{:href => "#"}
+                    Gedgets
+                    %span.badge 06
+                %li
+                  %a{:href => "#"}
+                    Technology
+                    %span.badge 25
+        / /.categories
+        .widget.archieve
+          %h3 Archieve
+          .row
+            .col-sm-12
+              %ul.blog_archieve
+                %li
+                  %a{:href => "#"}
+                    %i.fa.fa-angle-double-right
+                    December 2013
+                    %span.pull-right (97)
+                %li
+                  %a{:href => "#"}
+                    %i.fa.fa-angle-double-right
+                    November 2013
+                    %span.pull-right (32)
+                %li
+                  %a{:href => "#"}
+                    %i.fa.fa-angle-double-right
+                    October 2013
+                    %span.pull-right (19)
+                %li
+                  %a{:href => "#"}
+                    %i.fa.fa-angle-double-right
+                    September 2013
+                    %span.pull-right (08)
+        / /.archieve
+        .widget.tags
+          %h3 Tag Cloud
+          %ul.tag-cloud
+            %li
+              %a.btn.btn-xs.btn-primary{:href => "#"} Apple
+            %li
+              %a.btn.btn-xs.btn-primary{:href => "#"} Barcelona
+            %li
+              %a.btn.btn-xs.btn-primary{:href => "#"} Office
+            %li
+              %a.btn.btn-xs.btn-primary{:href => "#"} Ipod
+            %li
+              %a.btn.btn-xs.btn-primary{:href => "#"} Stock
+            %li
+              %a.btn.btn-xs.btn-primary{:href => "#"} Race
+            %li
+              %a.btn.btn-xs.btn-primary{:href => "#"} London
+            %li
+              %a.btn.btn-xs.btn-primary{:href => "#"} Football
+            %li
+              %a.btn.btn-xs.btn-primary{:href => "#"} Porche
+            %li
+              %a.btn.btn-xs.btn-primary{:href => "#"} Gadgets
+        / /.tags
+        -#.widget.blog_gallery
+          %h3 Our Gallery
+          %ul.sidebar-gallery
+            %li
+              %a{:href => "#"}
+                %img{:alt => "", :src => "images/blog/gallery1.png"}/
+            %li
+              %a{:href => "#"}
+                %img{:alt => "", :src => "images/blog/gallery2.png"}/
+            %li
+              %a{:href => "#"}
+                %img{:alt => "", :src => "images/blog/gallery3.png"}/
+            %li
+              %a{:href => "#"}
+                %img{:alt => "", :src => "images/blog/gallery4.png"}/
+            %li
+              %a{:href => "#"}
+                %img{:alt => "", :src => "images/blog/gallery5.png"}/
+            %li
+              %a{:href => "#"}
+                %img{:alt => "", :src => "images/blog/gallery6.png"}/
+        / /.blog_gallery
+    / /.row
+  / /.blog

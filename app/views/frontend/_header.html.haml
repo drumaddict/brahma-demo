@@ -1,0 +1,40 @@
+%header#header
+  .top-bar
+    .container
+      .row
+        .col-sm-6.col-xs-4
+          .top-number
+            %p
+              %i.fa.fa-phone-square
+              +0123 456 70 90
+        .col-sm-6.col-xs-8
+          = render partial: 'social'
+    / /.container
+  / /.top-bar
+  %nav.navbar.navbar-inverse{:role => "banner"}
+    .container
+      .navbar-header
+        %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand{:href => "index.html"}
+          %img{:alt => "logo", :src => image_path('logo.png')}/
+      .collapse.navbar-collapse.navbar-right
+        -# raise
+        %ul.nav.navbar-nav
+          -@main_menu.children.first.children.each_with_index  do |first_level_item,index|
+            -klass=index==0? 'active' : ''
+            -if !first_level_item.children.any?
+              %li{class: "#{klass}"}
+                =link_to first_level_item.title, first_level_item.link
+            -else
+              %li.dropdown{class: "#{klass}"}
+                =link_to  first_level_item.link, class: 'dropdown-toggle', 'data-toggle' => 'dropdown' do
+                  =first_level_item.title
+                  %i.fa.fa-angle-down
+                %ul.dropdown-menu
+                  - first_level_item.children.each do |second_level_item|
+                    %li
+                      =link_to second_level_item.title, second_level_item.link

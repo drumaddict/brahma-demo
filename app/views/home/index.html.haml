@@ -7,23 +7,21 @@
     .carousel-inner
       -@main_slider_images.each_with_index do |slide,index|
         -klass=index==0? 'active' : ''
-        .item{:style => "background-image: url('#{slide.medium.url(:slide_1400_730)}')", class: "#{klass}" }
+        .item{:style => "background-image: url('#{slide.becomes(MediaCollectionMedium).medium.url(:slide_1400_730)}')", class: "#{klass}" }
           .container
             .row.slide-margin
               .col-sm-6
                 .carousel-content
-                  %h1.animation.animated-item-1 Lorem ipsum dolor sit amet consectetur adipisicing elit
-                  %h2.animation.animated-item-2 Accusantium doloremque laudantium totam rem aperiam, eaque ipsa...
-                  %a.btn-slide.animation.animated-item-3{:href => "#"} Read More
+                  %h1.animation.animated-item-1=slide.title
+                  %h2.animation.animated-item-2=slide.description
+                  =link_to 'Read More', slide.link, class: 'btn-slide animation animated-item-3'
               .col-sm-6.hidden-xs.animation.animated-item-4
-                -#.slider-img
-                  %img.img-responsive{:src => image_path('slider/img1.png')}
-
   %a.prev.hidden-xs{"data-slide" => "prev", :href => "#main-slider"}
     %i.fa.fa-chevron-left
   %a.next.hidden-xs{"data-slide" => "next", :href => "#main-slider"}
     %i.fa.fa-chevron-right
-/ /#main-slider
+
+
 %section#feature
   .container
     .center.wow.fadeInDown
