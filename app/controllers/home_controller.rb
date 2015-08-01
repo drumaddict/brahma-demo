@@ -1,4 +1,4 @@
-class HomeController < AppController
+class HomeController < FrontendController
   def index
     #raise
     @main_slider_images = MediaCollection.find_by_slug("main-slider").media rescue []

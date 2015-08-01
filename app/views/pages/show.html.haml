@@ -8,31 +8,30 @@
         -if @page.media.any?
           .blog-item
             =image_tag @page.media.first.medium.url, alt: @page.title, width: '100%', class: 'img-responsive img-blog'
-          -#%img.img-responsive.img-blog{:alt => "", :src => image_url('blog/blog1.jpg'), :width => "100%"}/
-          .row
-            .col-xs-12.col-sm-2.text-center
-              .entry-meta
-                %span#publish_date 07  NOV
-                %span
-                  %i.fa.fa-user
-                  %a{:href => "#"} John Doe
-                %span
-                  %i.fa.fa-comment
-                  %a{:href => "blog-item.html#comments"} 2 Comments
-                %span
-                  %i.fa.fa-heart
-                  %a{:href => "#"} 56 Likes
-            .col-xs-12.col-sm-10.blog-content
-              %h2=@page.title
-              = raw @page.body
+            .row
+              .col-xs-12.col-sm-2.text-center
+                .entry-meta
+                  %span#publish_date 07  NOV
+                  %span
+                    %i.fa.fa-user
+                    %a{:href => "#"} John Doe
+                  %span
+                    %i.fa.fa-comment
+                    %a{:href => "blog-item.html#comments"} 2 Comments
+                  %span
+                    %i.fa.fa-heart
+                    %a{:href => "#"} 56 Likes
+              .col-xs-12.col-sm-10.blog-content
+                %h2=@page.title
+                = raw @page.body
 
-              .post-tags
-                %strong Tag:
-                %a{:href => "#"} Cool
-                \/
-                %a{:href => "#"} Creative
-                \/
-                %a{:href => "#"} Dubttstep
+                .post-tags
+                  %strong Tag:
+                  %a{:href => "#"} Cool
+                  \/
+                  %a{:href => "#"} Creative
+                  \/
+                  %a{:href => "#"} Dubttstep
         / /.blog-item
         .media.reply_section
           .pull-left.post_reply.text-center
@@ -59,7 +58,7 @@
             .container
               .center
                 %h2="#{@page.title}  Attached images"
-              %ul.portfolio-filter.text-center
+              -#%ul.portfolio-filter.text-center
                 %li
                   %a.btn.btn-default.active{"data-filter" => "*", :href => "#"} All Works
                 %li
@@ -86,8 +85,8 @@
                               %i.fa.fa-eye
                               View
 
-        %h1#comments_title 5 Comments
-        .media.comment_section
+        -#%h1#comments_title 5 Comments
+        -#.media.comment_section
           .pull-left.post_comments
             %a{:href => "#"}
               %img.img-circle{:alt => "", :src =>  image_url('blog/girl.png')}/
@@ -96,7 +95,7 @@
             %h4 NOVEMBER 9, 2013 AT 9:15 PM
             %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
             %a{:href => "#"} Reply
-        .media.comment_section
+        -#.media.comment_section
           .pull-left.post_comments
             %a{:href => "#"}
               %img.img-circle{:alt => "", :src =>  image_url('blog/boy2.png')}/
@@ -105,7 +104,7 @@
             %h4 NOVEMBER 9, 2013 AT 9:15 PM
             %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
             %a{:href => "#"} Reply
-        .media.comment_section
+        -#.media.comment_section
           .pull-left.post_comments
             %a{:href => "#"}
               %img.img-circle{:alt => "", :src =>  image_url('blog/boy3.png')}/
@@ -114,7 +113,7 @@
             %h4 NOVEMBER 9, 2013 AT 9:15 PM
             %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
             %a{:href => "#"} Reply
-        %div{:id => "contact-page clearfix"}
+        -#%div{:id => "contact-page clearfix"}
           .status.alert.alert-success{:style => "display: none"}
           .message_heading
             %h4 Leave a Replay
@@ -144,7 +143,7 @@
           %form{:role => "form"}
             %input.form-control.search_box{:autocomplete => "off", :placeholder => "Search Here", :type => "text"}
         / /.search
-        .widget.categories
+        -#.widget.categories
           %h3 Recent Comments
           .row
             .col-sm-12
@@ -187,22 +186,11 @@
           .row
             .col-sm-6
               %ul.blog_category
-                %li
-                  %a{:href => "#"}
-                    Computers
-                    %span.badge 04
-                %li
-                  %a{:href => "#"}
-                    Smartphone
-                    %span.badge 10
-                %li
-                  %a{:href => "#"}
-                    Gedgets
-                    %span.badge 06
-                %li
-                  %a{:href => "#"}
-                    Technology
-                    %span.badge 25
+                -@page_types.each do |page_type|
+                  %li
+                  =link_to page_type_path(page_type) do
+                    =page_type.title
+                    -#%span.badge=page_type.id
         / /.categories
         .widget.archieve
           %h3 Archieve

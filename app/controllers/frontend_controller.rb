@@ -5,6 +5,8 @@ class FrontendController <  Brahma::ApplicationController
 
     def website_init
         @main_menu=NavigationNode.roots.where(type: 'NavigationNode').first
+        @main_slider_images = MediaCollection.find_by_slug("main-slider").media rescue []
+        @page_types= PageType.find_all_by_generation(1)
 
        # @side_menu = Menu.find_by_slug("side_menu").menu_items.at_depth(0) rescue []
        # @info_menu=Menu.find_by_slug("info_menu").menu_items.at_depth(1) rescue []

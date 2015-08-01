@@ -14,6 +14,7 @@ class PagesController < FrontendController
   end
 
   def index
+     @pages=Page.all
 
   end
 
