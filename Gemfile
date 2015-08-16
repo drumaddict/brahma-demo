@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+source 'https://cyAdwmoJyoMEnzVVZQU_@gem.fury.io/drumaddict/'
 
 group :development do
  gem 'pry-byebug'
@@ -12,6 +12,9 @@ group :development do
 end
 
 gem 'brahma',      path: '../../Labs/brahma'
+gem 'jquery-rails'
+gem 'prettyphoto-rails'
+#gem 'brahma'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

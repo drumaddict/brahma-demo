@@ -976,8 +976,8 @@ a.accordion-toggle  i{
 }
 
 #conatcat-info{
-  background: #fff url(../images/contact.png) no-repeat 90% 0;
-  padding: 30px 0;
+  background-color: image-url(contact) no-repeat 90% 0;
+  background: #fff;
 }
 
 .contact-info i{
@@ -2202,7 +2202,7 @@ ul.pagination > li:hover > a {
 }
 
 .search_box {
-  background-image: url("search_icon.png");
+  background-image: image-url("search_icon.png");
   background-position: 314px 15px;
   background-repeat: no-repeat;
   border-color: #DEDEDE;

@@ -35,17 +35,22 @@ module Myapp
       config.assets.paths << bower_path
     end
 
-config.autoload_paths += [
-  config.root.join('app')
-]
+     config.assets.paths << "#{Rails.root}/app/assets/images/metronic"
+    config.autoload_paths += [
+      config.root.join('app')
+    ]
 
 config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+#config.autoload_paths += %W(#{config.root}/app/concerns)
 
     # Precompile Bootstrap fonts
     config.assets.precompile << %r(bootstrap-sass-official/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff)$)
     # Minimum Sass number precision required by bootstrap-sass
     ::Sass::Script::Number.precision = [10, ::Sass::Script::Number.precision].max
 
+ console do
+      ARGV.push "-r", root.join("lib/console.rb")
+    end
 
 
   end

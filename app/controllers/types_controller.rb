@@ -1,4 +1,4 @@
-class TypesController <  AppController
+class TypesController <  FrontendController
 
 before_filter :find_type, :only => [:show]
 

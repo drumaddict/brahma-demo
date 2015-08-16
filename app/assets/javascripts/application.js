@@ -16,7 +16,9 @@
 // require bootstrap-sass-official/assets/javascripts/bootstrap-sprockets
 
 //= require corlate/bootstrap.min.js
-//= require corlate/jquery.prettyPhoto
+//= require prettyphoto-rails
+//= require prettyphoto-rails-dev
+// require corlate/jquery.prettyPhoto
 //= require corlate/jquery.isotope.min
 //= require corlate/main
 //= require corlate/wow.min

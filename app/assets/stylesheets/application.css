@@ -13,5 +13,6 @@
  *= require_self
  *= require bootstrap_imports
  * require themes/blog
+ *= require prettyphoto-rails
  *= require styles
  */

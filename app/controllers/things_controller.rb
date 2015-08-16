@@ -1,5 +1,4 @@
-class ThingsController <  AppController
-
+class ThingsController <  FrontendController
 before_filter :find_thing, only: [:show]
 before_filter :find_type, only: [:index]
 
