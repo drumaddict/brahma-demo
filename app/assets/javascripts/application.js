@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 // require turbolinks
+//= require bootstrap-sprockets
 // require bootstrap-sass-official/assets/javascripts/bootstrap-sprockets
 
 //= require corlate/bootstrap.min.js
