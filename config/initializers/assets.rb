@@ -10,7 +10,8 @@
    # Rails.application.config.sass.load_paths << bower_path
     Rails.application.config.assets.paths << bower_path
   end
-  Rails.application.config.assets.paths << "#{Rails.root}/app/assets/images/metronic"
+
+  #Rails.application.config.assets.paths << "#{Rails.root}/app/assets/images/metronic"
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
