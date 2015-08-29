@@ -13,6 +13,10 @@
 
   #Rails.application.config.assets.paths << "#{Rails.root}/app/assets/images/metronic"
 
+  #controller specific js
+  # %w( controller_one controller_two controller_three ).each do |controller|
+  #   Rails.application.config.assets.precompile += ["#{controller}.js.coffee", "#{controller}.css"]
+  # end
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   Rails.application.config.assets.precompile += %w( search.js ie10-viewport-bug-workaround.js)
