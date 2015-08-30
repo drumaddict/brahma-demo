@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
-source 'https://cyAdwmoJyoMEnzVVZQU_@gem.fury.io/drumaddict/'
+source 'https://cyAdwmoJyoMEnzVVZQU_@gem.fury.io/drumaddict/' do
+  gem 'brahma'
+end
+#gem 'brahma',      path: '../../Labs/brahma'
+
 
 group :development do
  gem 'pry-byebug'
@@ -9,12 +13,16 @@ group :development do
  gem 'factory_girl'
  gem 'annotate'
  gem 'awesome_print', :require => 'ap'
+ gem 'capistrano',         require: false
+ gem 'capistrano-rvm',     require: false
+ gem 'capistrano-rails',   require: false
+ gem 'capistrano-bundler', require: false
+ gem 'capistrano3-puma',   require: false
 end
 
-gem 'brahma',      path: '../../Labs/brahma'
+gem 'puma'
 gem 'jquery-rails'
 gem 'prettyphoto-rails'
-#gem 'brahma'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
