@@ -1,5 +1,5 @@
 # Change these
-server '188.226.189.157', port: 80, roles: [:web, :app, :db], primary: true
+server '188.226.189.157', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@bitbucket.org:drumaddict/app.git'
 set :application,     'brahma_demo'
