@@ -81,4 +81,14 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { :host => "http://188.226.189.157/" }
+
+  config.action_mailer.smtp_settings = {
+        :address              => "smtp.gmail.com",
+        :port                 => 465,
+        :domain               => "gmail.com",
+        :user_name            => "kabasakalis@gmail.com",
+        :password             => "lauter211171",
+        :authentication       => :plain,
+        :enable_starttls_auto => true
+  }
 end
