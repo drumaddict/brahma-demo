@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-if ENV["RAILS_ENV"] == "development"
-  gem 'brahma',      path: '../../Labs/brahma'
-else
-  gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
-end
+# if ENV["RAILS_ENV"] == "development"
+#   gem 'brahma',      path: '../../Labs/brahma'
+# else
+#   gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
+# end
 
 
 group :development do
@@ -28,7 +28,7 @@ end
 gem 'puma'
 gem 'jquery-rails'
 gem 'prettyphoto-rails'
-
+gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # gem 'rails', '4.2.0'
