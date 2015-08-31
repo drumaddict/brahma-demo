@@ -1,24 +1,29 @@
 source 'https://rubygems.org'
-source 'https://cyAdwmoJyoMEnzVVZQU_@gem.fury.io/drumaddict/' do
-  gem 'brahma'
+
+if ENV["RAILS_ENV"] == "development"
+  gem 'brahma',      path: '../../Labs/brahma'
+else
+  gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
 end
-#gem 'brahma',      path: '../../Labs/brahma'
 
 
 group :development do
- gem 'pry-byebug'
- gem 'better_errors'
- gem 'binding_of_caller'
- gem 'faker'
- gem 'factory_girl'
- gem 'annotate'
- gem 'awesome_print', :require => 'ap'
- gem 'capistrano',         require: false
- gem 'capistrano-rvm',     require: false
- gem 'capistrano-rails',   require: false
- gem 'capistrano-bundler', require: false
- gem 'capistrano3-puma',   require: false
+  gem 'pry-byebug'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'faker'
+  gem 'factory_girl'
+  gem 'annotate'
+  gem 'awesome_print', :require => 'ap'
+  gem 'capistrano',         require: false
+  gem 'capistrano-rvm',     require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma',   require: false
+
+
 end
+
 
 gem 'puma'
 gem 'jquery-rails'
