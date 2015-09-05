@@ -2,7 +2,7 @@
 server '188.226.189.157', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@bitbucket.org:drumaddict/app.git'
-set :application,     'brahma-demo'
+set :application,     'brahma_demo'
 set :user,            'deploy'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
@@ -12,7 +12,7 @@ set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
-set :deploy_to,       "/var/www/#{fetch(:application)}"
+set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
