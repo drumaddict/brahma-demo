@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
+
+
 # if ENV["RAILS_ENV"] == "development"
 #   gem 'brahma',      path: '../../Labs/brahma'
 # else
 #   gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
 # end
-
-
+gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
+#gem 'brahma',      path: '../../Labs/brahma'
 group :development do
   gem 'pry-byebug'
   gem 'better_errors'
@@ -20,6 +22,7 @@ group :development do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma',   require: false
+  gem "capistrano-db-tasks", require: false
 
 
 end
@@ -28,7 +31,7 @@ end
 gem 'puma'
 gem 'jquery-rails'
 gem 'prettyphoto-rails'
-gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
+#gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # gem 'rails', '4.2.0'
