@@ -1,14 +1,19 @@
 source 'https://rubygems.org'
 
-
-
+brahma_from_disk= false
 # if ENV["RAILS_ENV"] == "development"
 #   gem 'brahma',      path: '../../Labs/brahma'
 # else
 #   gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
 # end
-gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
-#gem 'brahma',      path: '../../Labs/brahma'
+
+
+if brahma_from_disk
+  gem 'brahma',      path: '../../Labs/brahma'
+else
+  gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
+end
+
 group :development do
   gem 'pry-byebug'
   gem 'better_errors'
