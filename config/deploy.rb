@@ -1,5 +1,5 @@
 # Change these
-server '188.226.189.157', port: 22, roles: [:web, :app, :db], primary: true
+server '188.226.189.157', user: 'deploy', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@bitbucket.org:drumaddict/app.git'
 set :application,     'brahma-demo'
@@ -112,8 +112,13 @@ set :db_ignore_data_tables, []
 
 # If you want to import assets, you can change default asset dir (default = system)
 # This directory must be in your shared directory on the server
-#set :assets_dir, %w(public/assets public/att)
-#set :local_assets_dir, %w(public/assets public/att)
+# Assets
+ #set :assets_dir, 'public/assets'
+ #set :local_assets_dir, 'public'
+
+# Uploads
+set :assets_dir, 'public/uploads'
+set :local_assets_dir, 'public'
 
 # if you want to work on a specific local environment (default = ENV['RAILS_ENV'] || 'development')
 set :locals_rails_env, "production"
