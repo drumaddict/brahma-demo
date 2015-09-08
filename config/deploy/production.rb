@@ -9,14 +9,6 @@
 
 server '188.226.189.157', user: 'deploy', port: 22, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@bitbucket.org:drumaddict/app.git'
-set :application,     'brahma-demo'
-set :deploy_to,       "/var/www/#{fetch(:application)}"
-# Don't change these unless you know what you're doing
-set :pty,             true
-set :use_sudo,        false
-set :stage,           :production
-
 # role-based syntax
 # ==================
 
