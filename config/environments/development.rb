@@ -26,7 +26,6 @@ config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
-
   # Do not compress assets
   config.assets.compress = false
   # Debug mode disables concatenation and preprocessing of assets.

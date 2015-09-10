@@ -4,7 +4,8 @@ lock '3.4.0'
 #server '188.226.189.157', user: 'deploy', port: 22, roles: [:web, :app, :db], primary: true
 set :application, 'brahma-front'
 set :repo_url, 'git@bitbucket.org:drumaddict/app.git'
-set :user,            'deploy'
+set :branch,        :master
+set :user,      'deploy'
 
 # Default branch is :master
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -14,8 +15,6 @@ set :deploy_to, "/var/www/#{fetch(:application)}"
 
 #set :stage,           :production
 
-# Default value for :pty is false
-set :pty, true
 
 
 ## Defaults:
@@ -24,6 +23,8 @@ set :pty, true
 # set :format,        :pretty
 # set :log_level,     :debug
 # set :keep_releases, 5
+# Default value for :pty is false
+  set :pty, true
 
 # Default value for :linked_files is []
 #set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
@@ -56,6 +57,30 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 
 namespace :deploy do
 
+  desc "Make sure local git is in sync with remote."
+  task :check_revision do
+    on roles(:app) do
+      unless `git rev-parse HEAD` == `git rev-parse origin/master`
+        puts "WARNING: HEAD is not the same as origin/master"
+        puts "Run `git push` to sync changes."
+        exit
+      end
+    end
+  end
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
+
+  task :create_server_block do
+    on roles(:app) do
+      execute "ln -s #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/brahma-front"
+    end
+  end
+
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -65,9 +90,16 @@ namespace :deploy do
     end
   end
 
+  before :starting,     :check_revision
+  after  :finishing,    :compile_assets
+  after  :finishing,    :cleanup
+  #after   :finishing,    :create_server_block
+  after  :finishing,    :restart
+
+
 end
 
-
+ #after :deploy, "deploy:"
 
 #CAPISTRANO DB-TASKS
 

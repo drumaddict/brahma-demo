@@ -7,6 +7,7 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
+set :stage, :production
 server '188.226.189.157', user: 'deploy', port: 22, roles: [:web, :app, :db], primary: true
 
 # role-based syntax
@@ -59,3 +60,12 @@ server '188.226.189.157', user: 'deploy', port: 22, roles: [:web, :app, :db], pr
 #     auth_methods: %w(publickey password)
 #     # password: 'please use keys'
 #   }
+
+set :ssh_options, {
+    port: 22,
+    forward_agent: true,
+    auth_methods: %w(publickey),
+    keys:  %w(~/.ssh/id_rsa),
+    user: 'deploy',
+    password: 'brahma2111'
+}
