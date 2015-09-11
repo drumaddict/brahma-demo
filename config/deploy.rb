@@ -1,10 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-#server '188.226.189.157', user: 'deploy', port: 22, roles: [:web, :app, :db], primary: true
 set :application, 'brahma-front'
 set :repo_url, 'git@bitbucket.org:drumaddict/app.git'
-set :branch,        :master
 set :user,      'deploy'
 
 # Default branch is :master
@@ -13,10 +11,7 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/#{fetch(:application)}"
 
-#set :stage,           :production
-
-
-
+set :branch,        :master
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
@@ -24,7 +19,7 @@ set :deploy_to, "/var/www/#{fetch(:application)}"
 # set :log_level,     :debug
 # set :keep_releases, 5
 # Default value for :pty is false
-  set :pty, true
+set :pty, true
 
 # Default value for :linked_files is []
 #set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
@@ -33,7 +28,7 @@ set :deploy_to, "/var/www/#{fetch(:application)}"
 set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads public/assets_T}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads public/assets}
 
 
 # Default value for linked_dirs is []
@@ -134,7 +129,7 @@ set :local_assets_dir, 'public'
 set :locals_rails_env, "production"
 
 # if you are highly paranoid and want to prevent any push operation to the server
-set :disallow_pushing, true
+set :disallow_pushing, false
 
 # if you prefer bzip2/unbzip2 instead of gzip
 set :compressor, :bzip2
