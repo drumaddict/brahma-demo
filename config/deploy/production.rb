@@ -7,6 +7,11 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
+role :app, %w{188.226.189.157}
+role :web, %w{188.226.189.157}
+role :db,  %w{188.226.189.157}
+
+
 set :stage, :production
 server '188.226.189.157', user: 'deploy', port: 22, roles: [:web, :app, :db], primary: true
 
@@ -67,5 +72,4 @@ set :ssh_options, {
     auth_methods: %w(publickey),
     keys:  %w(~/.ssh/id_rsa),
     user: 'deploy',
-    password: 'brahma2111'
 }
