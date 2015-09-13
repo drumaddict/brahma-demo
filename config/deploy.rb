@@ -1,18 +1,18 @@
-# config valid only for current version of Capistrano
-lock '3.4.0'
-
-set :application, 'brahma-front'
-set :repo_url, 'git@bitbucket.org:drumaddict/app.git'
-set :user,      'deploy'
-
-# Default branch is :master
-ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-
 #For new app do
 #cap production setup:create_app_folder
 #cap production setup:upload_db_yml
 #cap production deploy
 #cap production setup:nginx
+
+# config valid only for current version of Capistrano
+lock '3.4.0'
+set :application, 'brahma-front'
+set :repo_url, 'git@bitbucket.org:drumaddict/app.git'
+set :user,      'deploy'
+
+
+# Default branch is :master
+ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/#{fetch(:application)}"
@@ -95,8 +95,6 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   #after   :finishing,    :create_server_block
-
-create_nginx_conf
   after  :finishing,    :restart
 
 

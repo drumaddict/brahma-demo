@@ -10,6 +10,7 @@ require 'capistrano/rails'
 require 'capistrano/bundler'
 require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
+require "airbrussh/capistrano"
 
 #require 'capistrano/sidekiq'
 #require 'whenever/capistrano'
