@@ -1,14 +1,26 @@
 namespace :logs do
-  task :tail, :file do |t, args|
-    if args[:file]
-      on roles(:app) do
-        execute "sudo tail -f #{shared_path}/log/#{args[:file]}.log"
-      end
-    else
-      puts "please specify a logfile e.g: 'rake logs:tail[logfile]"
-      puts "will tail 'shared_path/log/logfile.log'"
-      puts "remember if you use zsh you'll need to format it as:"
-      puts "rake 'logs:tail[logfile]' (single quotes)"
+  desc "Tail Logs - cap <stage> logs:tail log_file=<name>"
+  task :tail do
+    on roles(:app) do
+      execute_interactively "tail -n 10 -f #{shared_path}/log/#{ENV['log_file']}.log"
     end
+  end
+
+  desc "Tail nginx Logs - cap <stage> logs:nginx log_file=<name>"
+  task :nginx do
+    on roles(:app) do
+      execute_nginx_interactively "sudo tail -n 10 -f /var/log/nginx/#{ENV['log_file']}.log"
+    end
+  end
+
+  def execute_interactively(cmd)
+    user = fetch(:user)
+    info "Connection to #{host} as #{user}"
+    exec "ssh -l #{user} #{host} -t 'cd #{deploy_to}/current && #{cmd}'"
+  end
+  def execute_nginx_interactively(cmd)
+    user = fetch(:user)
+    info "Connection to #{host} as #{user}"
+    exec "ssh -l #{user} #{host} -t 'cd #{deploy_to}/current && #{cmd}'"
   end
 end
