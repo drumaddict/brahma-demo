@@ -11,7 +11,7 @@ lock '3.4.0'
 
 set :application, 'brahma_demo'
 set :repo_url, 'git@bitbucket.org:drumaddict/app.git'
-set :user, 'spiros'
+set :user, 'root'
 
 # Default branch is :master
 #ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
