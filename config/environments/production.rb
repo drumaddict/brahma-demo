@@ -80,14 +80,27 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  # config.action_mailer.default_url_options = { :host => "http://188.226.189.157/" }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #       :address              => "smtp.gmail.com",
+  #       :port                 => 587,
+  #       :user_name            => "kabasakalis@gmail.com",
+  #       :password             => "lauter211171",
+  #       :authentication       => :plain,
+  #       :enable_starttls_auto => true
+  # }
+
+
   config.action_mailer.default_url_options = { :host => "http://188.226.189.157/" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-        :address              => "smtp.gmail.com",
+        :address              => "smtp.mailgun.org",
         :port                 => 587,
-        :user_name            => "kabasakalis@gmail.com",
-        :password             => "lauter211171",
+        :user_name            => "postmaster@sandboxd9702b22a6804ed797135021b1c810f2.mailgun.org",
+        :password             => "0f7c48e9661ad0baad9efaded839968f",
         :authentication       => :plain,
         :enable_starttls_auto => true
   }
 end
+
