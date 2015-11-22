@@ -1,5 +1,6 @@
-PATH
-  remote: ../../Labs/brahma
+GIT
+  remote: git@bitbucket.org:drumaddict/brahma.git
+  revision: 0e05f83dc4c01c0c46c5a951be043a63deff6708
   specs:
     brahma (1.0.0)
       RedCloth (~> 4.2.8)

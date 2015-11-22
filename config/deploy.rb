@@ -10,7 +10,7 @@
 lock '3.4.0'
 
 set :application, 'brahma_demo'
-set :repo_url, 'git@github.com:drumaddict/chef-sample-app.git'
+set :repo_url, 'git@bitbucket.org:drumaddict/app.git'
 set :user, 'spiros'
 
 # Default branch is :master

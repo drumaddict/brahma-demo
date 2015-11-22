@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-brahma_from_disk = true
+brahma_from_disk = false
 
 
 if brahma_from_disk
