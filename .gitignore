@@ -17,3 +17,6 @@
 /tmp
 /vendor/assets/components
 /public
+/db/*.sql
+/public/uploads/tmp/*.*
+/config/database.yml

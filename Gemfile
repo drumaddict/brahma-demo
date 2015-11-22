@@ -1,11 +1,6 @@
 source 'https://rubygems.org'
 
-brahma_from_disk= false
-# if ENV["RAILS_ENV"] == "development"
-#   gem 'brahma',      path: '../../Labs/brahma'
-# else
-#   gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
-# end
+brahma_from_disk = true
 
 
 if brahma_from_disk
@@ -13,7 +8,7 @@ if brahma_from_disk
 else
   gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
 end
-
+gem 'pry'
 group :development do
   gem 'pry-byebug'
   gem 'better_errors'
@@ -22,21 +17,24 @@ group :development do
   gem 'factory_girl'
   gem 'annotate'
   gem 'awesome_print', :require => 'ap'
-  gem 'capistrano',         require: false
-  gem 'capistrano-rvm',     require: false
-  gem 'capistrano-rails',   require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano3-puma',   require: false
-  gem "capistrano-db-tasks", require: false
 
+
+  #Capistrano
+  gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano-rails', '~> 1.1.2'
+  gem 'capistrano-bundler',   require: false
+  gem "capistrano-db-tasks",  require: false
+  gem "airbrussh", :require => false
+  #gem 'capistrano3-puma'
+  #gem 'capistrano-passenger'
 
 end
 
-
-gem 'puma'
+gem 'unicorn'
 gem 'jquery-rails'
 gem 'prettyphoto-rails'
-#gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
+gem 'airbrake'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # gem 'rails', '4.2.0'
