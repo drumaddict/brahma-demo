@@ -9,7 +9,7 @@
 # config valid only for Capistrano 3.3.5 (3.4.0)
 lock '3.4.0'
 
-set :application, 'brahma_front'
+set :application, 'brahma_demo'
 set :repo_url, 'git@github.com:drumaddict/chef-sample-app.git'
 set :user, 'spiros'
 
@@ -17,8 +17,8 @@ set :user, 'spiros'
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/rails/apps/brahma_front'
-set :unicorn_service, 'brahma_front'
+set :deploy_to, '/rails/apps/brahma_demo'
+set :unicorn_service, 'brahma_demo'
 
 # Use agent forwarding for SSH so you can deploy with the SSH key on your workstation.
 set :ssh_options, {
