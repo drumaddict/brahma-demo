@@ -1,6 +1,6 @@
 GIT
   remote: git@bitbucket.org:drumaddict/brahma.git
-  revision: 0e05f83dc4c01c0c46c5a951be043a63deff6708
+  revision: 39ac6d67c81f3e1c79afb44d3f0c1a1004ce5921
   specs:
     brahma (1.0.0)
       RedCloth (~> 4.2.8)
