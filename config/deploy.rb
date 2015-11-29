@@ -40,7 +40,7 @@ set :pty, true
 set :linked_files, %w{config/database.yml .rbenv-vars .ruby-version}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{ log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{ log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads}
 
 # Default value for default_env is {}
 set :default_env, { path: "/opt/rbenv/shims:$PATH" }

@@ -17,6 +17,7 @@ group :development do
   gem 'factory_girl'
   gem 'annotate'
   gem 'awesome_print', :require => 'ap'
+  gem 'thin'
 
 
   #Capistrano
@@ -35,6 +36,7 @@ gem  'puma'
 gem 'jquery-rails'
 gem 'prettyphoto-rails'
 gem 'airbrake'
+
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
