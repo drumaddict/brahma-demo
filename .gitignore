@@ -20,3 +20,4 @@
 /db/*.sql
 /public/uploads/tmp/*.*
 /config/database.yml
+.capistrano
