@@ -25,12 +25,13 @@ group :development do
   gem 'capistrano-bundler',   require: false
   gem "capistrano-db-tasks",  require: false
   gem "airbrussh", :require => false
-  #gem 'capistrano3-puma'
+  gem 'capistrano3-puma'
   #gem 'capistrano-passenger'
 
 end
 
-gem 'unicorn'
+#gem 'unicorn'
+gem  'puma'
 gem 'jquery-rails'
 gem 'prettyphoto-rails'
 gem 'airbrake'

@@ -1,29 +1,29 @@
-#UNICORN DEPLOY.RB
+#PUMA DEPLOY.RB
 #The following commands are not needed since chef solo does it for us! :)
 #For new app do
 #cap production setup:create_app_folder
 #cap production setup:upload_db_yml
 #cap production deploy
 #cap production setup:nginx
-
-# config valid only for Capistrano 3.3.5 (3.4.0)
+# config valid only for Capistrano 3.1
 lock '3.4.0'
 
 set :application, 'brahma_demo'
 set :repo_url, 'git@bitbucket.org:drumaddict/app.git'
-set :user, 'root'
+set :user, 'spiros'
+set :app_name,'brahma_demo'
 
 # Default branch is :master
-#ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/rails/apps/brahma_demo'
-set :unicorn_service, 'brahma_demo'
 
 # Use agent forwarding for SSH so you can deploy with the SSH key on your workstation.
 set :ssh_options, {
   forward_agent: true
 }
+
 
 ## Defaults:
 # set :scm,           :git
@@ -45,26 +45,44 @@ set :linked_dirs, %w{ log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sy
 # Default value for default_env is {}
 set :default_env, { path: "/opt/rbenv/shims:$PATH" }
 
-set :bundle_bins, fetch(:bundle_bins, []).push("unicorn")
+#set :bundle_bins, fetch(:bundle_bins, []).push("puma")
+
+set :puma_user, fetch(:user)
+#set :puma_rackup, -> { File.join(current_path, 'config.ru') }
+set :puma_state, "#{shared_path}/puma/#{fetch(:app_name)}.state"
+set :puma_pid, "#{shared_path}/puma/#{fetch(:app_name)}.pid"
+set :puma_bind, "unix://#{shared_path}/puma/#{fetch(:app_name)}.sock"    #accept array for multi-bind
+set :puma_default_control_app, "unix://#{shared_path}/tmp/sockets/pumactl.sock"
+set :puma_conf, "#{shared_path}/puma/#{fetch(:app_name)}.config"
+set :puma_access_log, "#{shared_path}/log/puma.stdout.log"
+set :puma_error_log, "#{shared_path}/log/puma.stderr.log"
+set :puma_role, :app
+set :puma_env, fetch(:rack_env, fetch(:rails_env, 'production'))
+set :puma_threads, [1, 1]
+set :puma_workers, 2
+set :puma_worker_timeout, nil
+set :puma_init_active_record, false
+set :puma_preload_app, false
+set :nginx_use_ssl, false
+set :puma_init_active_record, true
+set :puma_monit_service_name,"#{fetch(:app_name)}.puma"
+
+
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-namespace :unicorn do
+namespace :deploy do
 
-  %w[start stop restart full-restart reload add-worker remove-worker status].each do |command|
-    desc "#{command} unicorn"
-    task command do
-      on roles :app, except: {no_release: true} do
-        sudo 'service', fetch(:unicorn_service), command
-      end
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
-end
+  after :publishing, :restart
 
-namespace :deploy do
-  after :publishing, 'unicorn:restart'
 end
 
 
