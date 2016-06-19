@@ -1,14 +1,17 @@
 source 'https://rubygems.org'
 
+
 brahma_from_disk = false
 
 
 if brahma_from_disk
   gem 'brahma',      path: '../../Labs/brahma'
 else
-  gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
+#  gem 'brahma', git: 'git@bitbucket.org:drumaddict/brahma.git'
+gem 'brahma', git: 'https://drumaddict2:drumaddict2@bitbucket.org/drumaddict/brahma.git'
 end
 gem 'pry'
+gem 'pg'
 group :development do
   gem 'pry-byebug'
   gem 'better_errors'
@@ -18,6 +21,7 @@ group :development do
   gem 'annotate'
   gem 'awesome_print', :require => 'ap'
   gem 'thin'
+  gem 'seed_dump'
 
 
   #Capistrano
