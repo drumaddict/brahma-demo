@@ -84,6 +84,6 @@ ThirdPartyMedium.create!([
   {title: "Vimeo", slug: "vimeo", description: ""},
   {title: "Soundcloud", slug: "soundcloud", description: ""}
 ])
-Administrator.create!([
-  {role_id: nil, email: "kabasakalis@gmail.com", encrypted_password: "$2a$10$8jegwUwYDdEWRl2tKTTdy.4mVJRGs7rxGWFvzfYcsoWbLW9ZphEm.", reset_password_token: "Yk9Bsdxbxa-BpbYEssUr", reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 231, current_sign_in_at: "2015-11-29 22:22:11", last_sign_in_at: "2015-11-29 21:45:21", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", failed_attempts: 0, unlock_token: nil, locked_at: nil}
-])
+# Administrator.create!([
+#   {role_id: nil, email: "kabasakalis@gmail.com", encrypted_password: "$2a$10$8jegwUwYDdEWRl2tKTTdy.4mVJRGs7rxGWFvzfYcsoWbLW9ZphEm.", reset_password_token: "Yk9Bsdxbxa-BpbYEssUr", reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 231, current_sign_in_at: "2015-11-29 22:22:11", last_sign_in_at: "2015-11-29 21:45:21", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", failed_attempts: 0, unlock_token: nil, locked_at: nil}
+# ])
